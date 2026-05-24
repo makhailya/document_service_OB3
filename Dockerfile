@@ -13,7 +13,7 @@ COPY pyproject.toml poetry.lock ./
 # Устанавливаем зависимости без создания виртуального окружения
 # (в Docker оно не нужно — контейнер сам изолирован)
 RUN poetry config virtualenvs.create false \
-    && poetry install --no-interaction --no-ansi --no-root
+    && poetry install --no-interaction --no-ansi --no-root --with dev
 
 # Копируем весь проект
 COPY . .
