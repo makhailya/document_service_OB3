@@ -149,3 +149,5 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Сервис обработки загружаемых документов',
     'VERSION': '1.0.0',
 }
+# Говорим Django использовать нашу модель, а не стандартную
+AUTH_USER_MODEL = 'users.User'
