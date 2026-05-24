@@ -18,6 +18,8 @@ urlpatterns = [
 
     # Swagger UI — красивая документация в браузере
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+
+    path('api/documents/', include('documents.urls')),
 ]
 
 # В режиме разработки отдаём медиафайлы через Django
