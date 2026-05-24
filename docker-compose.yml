@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+
+  # База данных PostgreSQL
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Данные сохраняются между перезапусками
+    ports:
+      - "5433:5432"
+
+  # Наш Django сервис
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app           # Синхронизируем код с контейнером
+      - media:/app/media # Загруженные файлы
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env             # Берём переменные из .env
+    depends_on:
+      - db               # Запускаться только после БД
+
+volumes:
+  postgres_data:
+  media:
